@@ -2,16 +2,50 @@
   display: none;
 }
 
+@font-face {
+    font-family: SFUIText; 
+    src: local("SFUIText Semibold"),
+         url(fonts/SF-UI-Text-Semibold.otf);
+}
+@font-face {
+    font-family: SFUITextMedium; 
+    src: local("SFUIText Medium"),
+         url(fonts/SF-UI-Text-Medium.otf);
+}
+@font-face {
+    font-family: SFUITextRegular; 
+    src: local("SFUIText Regular"),
+         url(fonts/SF-UI-Text-Regular.otf);
+}
+@font-face {
+  font-family: "Test--front-end";
+  src: url("fonts/Test--front-end_098c06d65defbb6ea10311c32cd9831b.eot");
+  src: url("fonts/Test--front-end_098c06d65defbb6ea10311c32cd9831b.eot?#iefix") format("embedded-opentype"),
+       url("fonts/Test--front-end_098c06d65defbb6ea10311c32cd9831b.woff2") format("woff2"),
+       url("fonts/Test--front-end_098c06d65defbb6ea10311c32cd9831b.woff") format("woff"),
+       url("fonts/Test--front-end_098c06d65defbb6ea10311c32cd9831b.ttf") format("truetype"),
+       url("fonts/Test--front-end_098c06d65defbb6ea10311c32cd9831b.svg#Test--front-end") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Test--front-end";
+    src: url("fonts/Test--front-end_098c06d65defbb6ea10311c32cd9831b.svg#Test--front-end") format("svg");
+  }
+}
+
 html, body {
-  font-family: 'Roboto', sans-serif;
-  font-size: 14px;
+  font-family: 'SFUIText', sans-serif;
+  font-size: 16px;
   height: 100%;
   margin: 0px;
   padding: 0px;
+  background: #f7f7f7;
 }
-
+.layout-column > .flex{overflow: hidden;}
 /* Toolbar area */
-
 .menu {
   background-color: transparent;
   border: none;
@@ -25,35 +59,55 @@ md-toolbar h1 {
 }
 
 /* Sidenav area */
+.add-proj{
+  font-size: .75em; color: #b3bbcb;
+  padding: .5em 4em 1.3em  3.8em;
+  position: relative;
+  clear: both;
+  margin-right: 2.3em;
+  outline: none;
+}
+md-sidenav{
+  background: #292c33; max-width: 21.2em; width:100%; color: #fff; 
+}
+md-list-item, md-list-item .md-list-item-inner,
+md-list-item::before, md-list-item .md-list-item-inner::before{min-height: 38px;}
+md-list-item.md-no-proxy, md-list-item .md-no-style{
+  padding: 0 1.875em;
+}
 
+users-list{clear: both}
+md-list{ padding: 0;}
 md-list .md-button {
-  color: inherit;
+  color: #fff;
   font-weight: 500;
   text-align: left;
   width: 100%;
+  letter-spacing: 0;
+  margin: 1px 0 0;
+  text-transform: none;
+  padding: 0.9em 2.3em 0.9em 1.1em;
+  line-height: 1;
+  position: relative;
+  font-size: .9em;
 }
-
-md-list .md-button.selected {
-  color: #03a9f4;
+md-list .md-button span{word-wrap:break-word;}
+md-list .md-button.selected {background-color: rgba(107, 107, 153, 1);}
+md-list .md-button span.col,
+md-list span.proj-col {
+  position: absolute; top: 50%; right: 0.9em;  margin-top: -.45em;
+  cursor: pointer;
+  outline: none;
 }
-
-md-sidenav md-list {
-  padding: 0px 0px 8px 0px;
+md-list span.proj-col{  margin-top: -1.2em;}
+md-list span.proj-col:after{
+  content:"\f109";
+  font-family: "Test--front-end";
+  color: #fff;
+  font-size: 1.5em;
 }
-
 /* Primary content area */
-
-#content {
-  overflow: hidden;
-}
-
-#content {
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 5px;
-}
-
-#content .md-button.share {
+.content .md-button.share {
   background-color: transparent;
   border: none;
   width: 48px;
@@ -64,11 +118,7 @@ md-sidenav md-list {
   right: 25px;
 }
 
-#content md-icon.avatar {
-  margin-top: 10px;
-}
-
-#content .md-button.share > md-icon {
+.content .md-button.share > md-icon {
   fill: black;
   width: 36px;
   height: 36px;
@@ -80,14 +130,14 @@ md-button.menuBtn > md-icon {
   height: 24px;
 }
 
-#content .md-button.share:active > md-icon {
+.content .md-button.share:active > md-icon {
   background-color: #dadada;
   border-radius: 75%;
   padding: 4px;
   transition: all 100ms ease-out 30ms;
 }
 
-#content img {
+.content img {
   display: block;
   height: auto;
   max-width: 500px;
@@ -108,26 +158,253 @@ md-toolbar h1 {
 
 .avatar {
   position: relative;
-  width: 128px;
-  height: 128px;
-  border: 1px solid #ddd;
+  width: 3.125em;
+  height: 3.125em;
+  border: 3px solid #292c33;
+  box-shadow: 0 0 0 .09em #fff;
   border-radius: 50%;
   display: inline-block;
   overflow: hidden;
-  margin: 0px;
-  vertical-align: middle;
-  zoom: 0.70;
-  transform: translateZ(0);
-  -webkit-transform: scale(0.70);
-  -moz-transform: scale(0.70);
+  margin: 1.29em 1.5em 2.2em 2.6em !important;
+  background-size: 100% 100%; background-position: 0 0;
+  float: left;
+}
+.user-name{
+  overflow: hidden;
+  padding-top: 2.9em;
+  display: block;
+  font-size: .9em;
+} 
+
+.task-wrap{
+  max-width: 39em; width: 100%; margin: 0 auto;
+  font-size: 0.9em;
+}
+.task{
+  box-shadow: 0 10px 30px rgba(0,0,0,.16);
+  -webkit-box-shadow: 0 10px 30px rgba(0,0,0,.16);
+  -moz-box-shadow: 0 10px 30px rgba(0,0,0,.16);
+  -o-box-shadow: 0 10px 30px rgba(0,0,0,.16);
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -o-border-radius: 7px;
+  margin-bottom: 1.25em;
+  color: #212121;
+  position: relative;
+  outline: none;
+}
+.task-in{
+  position: relative;
+  padding: 1.45em 6.3em;
+  word-wrap:break-word;
+}
+.task-in:first-child ~ div:after{
+  position: absolute; top: 0; left: 3.75em; right: 3.75em;
+  content: '';
+  height: 1px; background: #eaeaea;
+}
+.task-in:before{
+  position: absolute; 
+  content: '';
+  left:5.3em; top: 0.6em; bottom: 0.6em;
+  width: 1px; background: #eaeaea;
+}
+.task-date{
+  padding: 0 .56em;
+  margin-bottom: .4em;
+  color: #b3bbcb;
+  margin-top: 1.25em;
+}
+.task-date span{
+  font-size: 80%;
+}
+.task-del{
+  border-radius: 50%;
+  width: .9em; height: .9em;
+  border: 3px solid #bdbdbd;
+  position: absolute; top: 50%; margin-top: -.5em; left: 2em;
+  cursor: pointer;
 }
 
-md-bottom-sheet md-icon {
-  margin-right: 20px;
+search input{
+  color: #333;
+  font-size: .9em;
+  padding: 1.8em 5em 1.8em 2em;
+    font-family: SFUITextRegular; 
+  position: relative;
+  border:none; 
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  background: none;
+  height: 1.4em;
+  outline: none;
+}
+search label{
+  font-family: "Test--front-end";
+  font-size: 1.7em;
+  content:"\f10a";
+  position: absolute;
+  left: 1em;
+  top: 50%; margin-top: -.7em;
+  opacity: 1;
+  color: #b3bbcb;
+  height: 1.4em; line-height: 1.4em
+}
+search .focused label, search .empty label{
+  opacity: 0;
 }
 
-span.name {
-  font-weight: bold;
+.menu.md-icon-button{
+  position: absolute;
+  top: 0; right: 0;
+  z-index: 1;
+  height:3.2em;
+  width: 3.125em; 
+  margin: 0;
+  cursor: pointer;
+  text-align: center;
+  line-height: 3.2em;
+  outline: none;
+}
+.menu.md-icon-button:after{
+  content: "\f108"; display: inline-block;
+  font-family: "Test--front-end";
+  font-size: 2em;
+  color: #9e9e9e;
+}
+.md-sidenav-right {
+  position: fixed;
+}
+md-backdrop{position: fixed;}
+.firstPage{
+  height: 100%; width: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  font-family: "Test--front-end";
+  font-size: 14em;
+  color: #b1b1c8;
+}
+.firstPage span{
+  font-family: SFUIText; 
+  font-size: 24px;
+}
+.firstPage>div{
+  height: 100%; min-height: 270px;
+}
+.md-button.md-default-theme.md-fab:not([disabled]).md-focused, .md-button.md-fab:not([disabled]).md-focused, .md-button.md-default-theme.md-fab:not([disabled]):hover, .md-button.md-fab:not([disabled]):hover{
+  background: #585895;
+}
+.md-button.md-fab {background: #6b6b99; width: 3.12em; height: 3.12em; box-shadow: none;}
+.md-button.md-fab:after{
+  position: absolute; top: 50%; left: 0; right: 0; margin-top: -1.3em;
+  text-align: center;
+  font-family: "Test--front-end";
+  color: #fff;
+  content: "\f109";
+  font-size: 1.5em;
+
+}
+
+.md-sidenav-right{
+  width: 100%; max-width: 31.25em;
+}
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
+  background: none;
+  text-align: center;
   font-size: 1.1em;
-  padding-left: 5px;
+  padding: 1.7em 0 0;
+  font-family: SFUITextMedium; 
 }
+md-toolbar .title input{
+  background: none;
+  font-size: 1.1em;
+  font-family: SFUITextMedium; 
+  border: none;
+  text-align: center;
+  outline: none;
+  color: rgba(255,255,255,0.87);
+}
+md-toolbar .close{
+  position: absolute; top: 1.2em; left: .8em;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+md-toolbar .close:before{font-family: "Test--front-end";content: "\f105"; display: block; font-size: 1.3em;}
+md-toolbar .close:after{content: 'ESC'; display: block; font-size: .5em;}
+.edite{
+  position: absolute; 
+  // top: 1.6em; right: 3.7em;
+  top:50%; right: 1em; margin-top: -.5em; display: none;
+  color: #51555e;
+  cursor: pointer;
+  outline: none;
+}
+.edite:before{font-family: "Test--front-end";content: "\f106"; display: block; font-size: 1em;}
+.task-in:hover .edite, .task-in:active .edite{display: block;}
+
+md-toolbar .delete{
+  position: absolute; top: 1.6em; right: 1.6em;
+  color: #51555e;
+  cursor: pointer;
+  outline: none;
+}
+md-toolbar .delete:before{font-family: "Test--front-end";content: "\f104"; display: block; font-size: 1em;}
+
+
+md-sidenav md-content{
+background: none;
+}
+md-sidenav md-content form{
+  text-align: center;}
+  md-input-container label{ text-align: left; color: #f6f6f6 !important; font-size: .9em; font-family: SFUITextRegular; }
+.md-input-focused label, .md-input-has-value label{
+  color: #888 !important;
+ }
+ md-input-container{
+  width: 68%;
+ }
+md-input-container .md-input{ text-align: left; height: 34px;}
+md-input-container .md-input {
+  border-color: #bdbdbd !important; color: #fff !important;
+
+    font-family: SFUITextRegular; 
+}
+.md-input-focused .md-input, .md-input-has-value .md-input{
+  border-color: #888 !important;
+}
+md-input-container{
+  margin: .5em 0 .2em;
+}
+.md-button.md-fab.md-fab-bottom-right.fixed-btn{position: fixed;}
+.md-button.md-fab.ok:after{content: "\f103"}
+md-input-container .md-errors-spacer{display: none;}
+.text{width: 69%; margin: 0 auto; line-height: 180%; color: #dbdbdb; font-family: SFUITextRegular; font-size:.75em; padding-top: 1.5em;}
+
+
+
+.content{
+  display: flex;
+  flex-direction: column;            
+  height: 100vh;  
+  width: 100%;
+  overflow: hidden;
+}
+search {
+  position: relative; z-index: 1;
+  width: 100%;
+  height: 3.1em;
+  border-bottom: 1px solid #bdbdbd;
+  background: #f7f7f7;
+  flex: 0 0 auto;  
+}
+#content{
+  flex: 1 1 auto;     
+  overflow-y: auto;     
+  position: relative;
+}
+.md-button{white-space: normal;}

@@ -1,0 +1,24 @@
+<div class="firstPage" ng-show="!$ctrl.hasTasks && !$ctrl.firstPage" flex>
+  <div layout="column" layout-align="center center">&#xf10b;<span>Have a good day</span></div>
+</div>
+<div class="firstPage" ng-show="$ctrl.noResults && $ctrl.hasTasks" flex>
+  <div layout="column" layout-align="center center"><span>Nothing is found. Choose Project</span></div>
+</div>
+<div class="firstPage" ng-show="$ctrl.firstPage && !$ctrl.hasTasks" flex>
+  <div layout="column" layout-align="center center"><span>Choose Project</span></div>
+</div>
+<div ng-repeat="item in $ctrl.items"
+         class="repeated-item task-wrap" flex ng-show="$ctrl.hasTasks">
+    <div class="task-date">
+    	{{item.time| date:  'EEEE '}}
+    	<span>{{item.time| date:  '(dd.MM.yyyy)'}}</span>
+    </div>
+    <div class="task">
+    	<div ng-repeat="i in item.data" class="task-in">
+        <span class="task-del" ng-click="$ctrl.deleteTask(i.id)"></span>{{i.title}}
+        <div class="edite"  ng-click="$ctrl.editTask(i)"></div>
+      </div>
+
+    </div>
+</div>
+<md-button class="md-fab md-fab-bottom-right fixed-btn" ng-click="$ctrl.toggleNewTask()" ng-show="$ctrl.selected"></md-button>

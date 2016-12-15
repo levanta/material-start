@@ -3,8 +3,8 @@ import UserDetailsController from './UserDetailsController'
 export default {
   name : 'userDetails',
   config : {
-    bindings         : {  selected: '<' },
+    bindings         : {  users: '<', selected: '<' },
     templateUrl      : 'src/users/components/details/UserDetails.html',
-    controller       : [ '$mdBottomSheet', '$log', UserDetailsController ]
+    controller       : [ '$mdBottomSheet','$mdSidenav', '$mdUtil', '$scope', '$http', '$cookies', '$rootScope', UserDetailsController ]
   }
 };

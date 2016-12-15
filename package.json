@@ -14,6 +14,7 @@
       "angular": "github:angular/bower-angular@1.5.8",
       "angular-animate": "github:angular/bower-angular-animate@1.5.8",
       "angular-aria": "github:angular/bower-angular-aria@1.5.8",
+      "angular-cookies": "github:angular/bower-angular-cookies@^1.6.0",
       "angular-material": "github:angular/bower-material@master",
       "angular-messages": "github:angular/bower-angular-messages@1.5.8",
       "css": "github:systemjs/plugin-css@^0.1.20",
@@ -34,5 +35,8 @@
   "scripts": {
     "postinstall": "jspm install",
     "serve": "live-server ./app"
+  },
+  "dependencies": {
+    "angular-cookies": "^1.6.0"
   }
 }

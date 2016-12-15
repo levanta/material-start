@@ -7,43 +7,39 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 
   <title>Angular Material - Starter App</title>
-  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,700'>
   <link rel="stylesheet" href="./jspm_packages/github/angular/bower-material@master/angular-material.css"/>
   <link rel="stylesheet" href="./assets/app.css"/>
 </head>
 
 <body ng-cloak layout="column" ng-controller="AppController as app">
+  <md-progress-linear md-mode="indeterminate" ng-hide="app.hideProgress"></md-progress-linear>
+  {{app.determinateValue}}
+  <div flex layout="row" ng-show="app.hideProgress">
 
-  <!-- Container #1 (see wireframe) -->
-  <md-toolbar layout="row" class="md-toolbar-tools">
-    <md-button class="menu md-icon-button" hide-gt-sm ng-click="app.toggleList()"
-               aria-label="Show User List">
-      <md-icon md-svg-icon="menu"></md-icon>
-    </md-button>
-    <h1>Angular Material - Starter App</h1>
-  </md-toolbar>
-
-  <!-- Container #2 -->
-  <div flex layout="row">
-
-    <!-- Container #3 -->
-    <md-sidenav class="md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-sm')"
-                md-component-id="left" ng-click="app.toggleList()">
-      <!-- Custom UsersList component -->
+    <md-sidenav 
+        class="md-whiteframe-4dp" 
+        md-is-locked-open="$mdMedia('gt-sm')"
+        md-component-id="left" 
+        ng-click="app.toggleList()"
+        md-swipe-left="app.toggleList()">
       <users-list
+          account="app.account"
           users="app.users"
           selected="app.selected"
           on-selected="app.selectUser(user)">
       </users-list>
     </md-sidenav>
 
-    <!-- Container #4 -->
-    <md-content flex id="content">
-      <!-- Custom UserDetails component -->
-      <user-details
-          selected="app.selected" >
-      </user-details>
+    <md-content class="content" md-swipe-right="app.toggleList()">
+      <search selected="app.selected" ></search>
+      <dropdown-menu selected="app.selected" users="app.users"></dropdown-menu>
+
+      <div id="content">
+        <tasks-list selected="app.selected" id="tasks" flex></tasks-list>
+      </div>
     </md-content>
+
+    <user-details selected="app.selected" users="app.users"></user-details>
 
   </div>
 
@@ -54,6 +50,5 @@
         .import('src/boot/boot')
         .catch( console.error.bind(console) ); // make sure any errors print to console
   </script>
-
 </body>
 </html>

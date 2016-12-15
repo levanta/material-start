@@ -1,7 +1,94 @@
-<md-icon md-svg-icon="{{$ctrl.selected.avatar}}" class="avatar"></md-icon>
-<h2>{{$ctrl.selected.name}}</h2>
-<p>{{$ctrl.selected.content}}</p>
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="newProj" md-is-locked-open="lock && $mdMedia('gt-md')">
 
-<md-button class="md-fab md-fab-bottom-right" ng-click="$ctrl.share($event)" aria-label="Share">
-  <md-icon md-svg-icon="share" ></md-icon>
-</md-button>
+  <md-toolbar class="md-theme-light">
+    <div class="title">Create new project</div>
+    <div  ng-click="$ctrl.toggleNewProj()" class="close"></div>
+  </md-toolbar>
+  <md-content>
+    <form>
+      <md-input-container>
+        <label for="testInput">Project name</label>
+        <input type="text" id="testInput" ng-model="$ctrl.projectName" md-sidenav-focus="">
+      </md-input-container>
+    </form>
+    <md-button class="md-fab md-fab-bottom-right fixed-btn ok"   ng-click="$ctrl.toggleNewProj(); $ctrl.createProject()"></md-button>
+  </md-content>
+
+</md-sidenav>
+
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="newTask" md-is-locked-open="lock && $mdMedia('gt-md')">
+
+  <md-toolbar class="md-theme-light">
+    <div class="title">Create new task</div>
+    <div  ng-click="$ctrl.toggleNewTask()" class="close"></div>
+  </md-toolbar>
+  <md-content>
+    <form>
+      <md-input-container>
+        <label for="testInput">Task name</label>
+        <input type="text" id="testInput" ng-model="$ctrl.taskName" md-sidenav-focus="">
+      </md-input-container>
+      <md-input-container>
+        <label for="testInput">Description</label>
+        <input type="text" id="descriptionInput" ng-model="$ctrl.description">
+      </md-input-container>
+    </form>
+    <md-button class="md-fab md-fab-bottom-right fixed-btn ok" ng-click="$ctrl.toggleNewTask(); $ctrl.createTask();"></md-button>
+  </md-content>
+</md-sidenav>
+
+
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="editProj" md-is-locked-open="lock && $mdMedia('gt-md')">
+
+  <md-toolbar class="md-theme-light">
+    <div class="title">Edit project</div>
+    <div  ng-click="$ctrl.toggleEditProj()" class="close"></div>
+  </md-toolbar>
+  <md-content>
+    <form>
+      <md-input-container>
+        <label for="testInput">Project name</label>
+        <input ng-model="$ctrl.projTitle" ng-value="$ctrl.selected.title" md-sidenav-focus="">
+      </md-input-container>
+    </form>
+    <md-button class="md-fab md-fab-bottom-right fixed-btn ok"   ng-click="$ctrl.toggleEditProj(); $ctrl.updateProj($ctrl.selected);"></md-button>
+  </md-content>
+
+</md-sidenav>
+
+
+<!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="editTask" md-is-locked-open="lock && $mdMedia('gt-md')">
+  <md-toolbar class="md-theme-light">
+    <div class="title"><input ng-model="$ctrl.taskName" ng-value="$ctrl.taskName" ng-readonly="$ctrl.readonly" id="taskTitle"></div>
+    <div  ng-click="$ctrl.toggleEditTask()" class="close"></div>
+    <div class="edite" ng-click="$ctrl.focusTask()"></div>
+    <div class="delete"  ng-click="$ctrl.delTask(); $ctrl.toggleEditTask();"></div>
+  </md-toolbar>
+  <md-content>
+    <div class="text">
+      <textarea ng-model="$ctrl.description" ng-value="$ctrl.description" ng-readonly="$ctrl.readonly">{{$ctrl.description}}</textarea>
+    </div>
+    <md-button class="md-fab md-fab-bottom-right fixed-btn ok"   ng-click="$ctrl.toggleEditTask(); $ctrl.updateTask();"></md-button>
+  </md-content>
+</md-sidenav> -->
+
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="editTask" md-is-locked-open="lock && $mdMedia('gt-md')">
+  <md-toolbar class="md-theme-light">
+    <div class="title">Edit task</div>
+    <div  ng-click="$ctrl.toggleEditTask()" class="close"></div>
+    <div class="delete"  ng-click="$ctrl.delTask(); $ctrl.toggleEditTask();"></div>
+  </md-toolbar>
+  <md-content>
+    <form>
+      <md-input-container>
+        <label for="testInput">Task name</label>
+        <input type="text" ng-model="$ctrl.taskName" ng-value="$ctrl.taskName" md-sidenav-focus="">
+      </md-input-container>
+      <md-input-container>
+        <label for="testInput">Description</label>
+        <input type="text" ng-model="$ctrl.description" ng-value="$ctrl.description" >
+      </md-input-container>
+    </form>
+    <md-button class="md-fab md-fab-bottom-right fixed-btn ok" ng-click="$ctrl.toggleEditTask(); $ctrl.updateTask();"></md-button>
+  </md-content>
+</md-sidenav>

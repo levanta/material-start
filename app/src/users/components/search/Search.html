@@ -1,0 +1,8 @@
+<div ng-class="{focused: focused, empty: $ctrl.searchString.length > 0}" >
+
+	<label for="">&#xf10a; {{empty}}</label>
+	<input 
+	ng-model="$ctrl.searchString" 
+	ng-init="focused = false" ng-focus="focused = true" ng-blur="focused = false" 
+	ng-keyup="$ctrl.search();">
+</div>
